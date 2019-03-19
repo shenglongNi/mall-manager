@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--指定properties-->
+    <properties resource="generator.properties"></properties>
+
+    <context id="MysqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="utf-8"/>
+
+        <!--指定自定义CommonGenerator-->
+        <commentGenerator type="com.mall.CommonGenerator">
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!--指定数据库连接-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mall"
+                        userId="nsl"
+                        password="1qaz@WSX">
+
+        </jdbcConnection>
+
+        <!--指定java Model生成位置-->
+        <javaModelGenerator targetPackage="com.mall.core.model" targetProject="mall-core\src\main\java" />
+        <!--指定Mapper Xml 文件生成位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="mall-core\src\main\resources"/>
+        <!--指定DAO 生成位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mall.core.mapper.dao" targetProject="mall-core\src\main\java"/>
+
+        <!--生成全部表-->
+        <table tableName="%">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

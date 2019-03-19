@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.core.mapper.dao.UserMapperDao">
+    <resultMap id="allFieldResultMap" type="com.mall.core.model.UserModel">
+        <id property="id" javaType="long" column="id"/>
+        <result property="username" javaType="string" column="username"/>
+        <result property="password" javaType="string" column="password" />
+        <result property="icon" javaType="string" column="icon"/>
+        <result property="email" javaType="string" column="email"/>
+        <result property="nickName" javaType="string" column="nick_name"/>
+        <result property="note" javaType="string" column="note"/>
+        <result property="createTime" javaType="date" column="create_time"/>
+        <result property="loginTime" javaType="date" column="login_time"/>
+        <result property="status" javaType="_int" column="status"/>
+    </resultMap>
+
+
+    <select id="queryByName" resultMap="allFieldResultMap">
+        select id, username, password, icon , email, nick_name, note , create_time, login_time, status
+        from ums_admin
+        where
+        username=#{username}
+
+    </select>
+</mapper>
