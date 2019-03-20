@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.core.mapper.dao.UserRoleRelationMapperDao">
+    <resultMap id="permissionResultMap" type="com.mall.core.model.UserPermission">
+        <result property="id" javaType="long" column="id"/>
+        <result property="pid" javaType="long" column="pid"/>
+        <result property="name" javaType="string" column="name"/>
+        <result property="value" javaType="string" column="value"/>
+        <result property="icon" javaType="string" column="icon"/>
+        <result property="uri" javaType="string" column="uri"/>
+        <result property="status" javaType="int" column="status"/>
+        <result property="createTime" javaType="date" column="create_time"/>
+        <result property="sort" javaType="int" column="sort"/>
+    </resultMap>
+
+    <select id="getUserPermissionBy" resultMap="permissionResultMap">
+        SELECT
+        p.*
+        FROM
+        ums_admin_role_relation ur
+        LEFT JOIN
+        ums_role_permission_relation rp
+        ON
+        ur.role_id = rp.role_id
+        LEFT JOIN
+        ums_permission p
+        ON
+        rp.permission_id = p.id
+        WHERE
+        ur.admin_id = #{userId}
+
+    </select>
+
+
+</mapper>

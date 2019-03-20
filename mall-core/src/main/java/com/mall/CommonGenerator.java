@@ -21,7 +21,7 @@ public class CommonGenerator extends DefaultCommentGenerator{
     /**
      * 给字段添加注释
      * @param field
-     * @param introspectedTable
+     * @param introspectedTable`
      * @param introspectedColumn
      */
     @Override
