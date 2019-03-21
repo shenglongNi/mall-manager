@@ -3,10 +3,12 @@ package com.mall.domain;
 import com.mall.core.model.UserPermission;
 import org.assertj.core.util.Lists;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustUserDetails implements UserDetails{
 
@@ -29,7 +31,10 @@ public class CustUserDetails implements UserDetails{
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
 //        TODO 添加permission验证
-        return null;
+        return permissions.stream()
+                .filter(permission -> permission.getValue() != null)
+                .map(permission -> new SimpleGrantedAuthority(permission.getValue()))
+                .collect(Collectors.toList());
     }
 
     @Override

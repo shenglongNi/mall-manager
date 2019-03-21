@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -62,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
-    public PasswordEncoder passwordEncoderBean() {
+    public Md5PasswordEncoder passwordEncoderBean() {
         return new Md5PasswordEncoder();
     }
 
@@ -72,8 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 UserModel userModel = userService.queryUserByName(username);
-                List<UserPermission> userpermissions = userRoleRelationMapperDao.getUserPermissionBy(userModel.getId());
-                return new CustUserDetails(userModel.getUsername(), userModel.getPassword(), userModel.getStatus(), userpermissions);
+                List<UserPermission> userPermission = userRoleRelationMapperDao.getUserPermissionBy(userModel.getId());
+                return new CustUserDetails(userModel.getUsername(), userModel.getPassword(), userModel.getStatus(), userPermission);
             }
         };
     }
