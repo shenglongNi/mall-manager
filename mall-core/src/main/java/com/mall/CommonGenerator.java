@@ -10,13 +10,15 @@ import java.util.Properties;
 
 public class CommonGenerator extends DefaultCommentGenerator{
     /**
-     * 设置用户配置的参数
+     * 设置用户
      * @param properties
      */
     @Override
     public void addConfigurationProperties(Properties properties) {
         super.addConfigurationProperties(properties);
     }
+
+
 
     /**
      * 给字段添加注释
